@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <script>
-    this.location = "https://saog.cn:9270" ;
+    this.location = "http://saog.cn:8" ;
 </script>
 </html>
