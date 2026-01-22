@@ -3,45 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages 嵌入页面</title>
+    <title>跳转提示</title>
     <style>
-        /* 完全隐藏iframe边框和滚动条，模拟原生页面 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100vh; overflow: hidden; }
-        #embedFrame {
-            width: 100vw;
-            height: 100vh;
-            border: 0;
-            display: block;
-            /* 解决部分页面的跨域样式问题 */
-            frameborder: 0;
-            allowfullscreen: true;
-        }
-        /* 加载失败时的提示样式 */
-        .error-tip {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            font-size: 16px;
-            color: #333;
-        }
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: Arial; }
+        .container { text-align: center; padding: 20px; }
+        a { color: #007bff; text-decoration: none; font-size: 18px; }
     </style>
 </head>
 <body>
-    <!-- 嵌入目标页面 -->
-    <iframe 
-        id="embedFrame" 
-        src="https://saog.cn:5667"
-        onload="this.style.display='block'"
-        onerror="document.querySelector('.error-tip').style.display='block'"
-    ></iframe>
-    
-    <!-- 加载失败提示 -->
-    <div class="error-tip" style="display: none;">
-        页面加载失败（目标网站禁止嵌入/网络错误）<br>
-        请直接访问：<a href="https://saog.cn:5667" target="_blank">https://saog.cn:5667</a>
+    <div class="container">
+        <h2>正在为您打开页面...</h2>
+        <p>如果没有自动跳转，请点击下方链接：</p>
+        <a href="https://saog.cn:5667" target="_blank">访问 https://saog.cn:5667</a>
     </div>
+
+    <!-- 尝试静默打开新窗口（部分浏览器会拦截） -->
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+                window.open('https://saog.cn:5667', '_blank');
+            }, 1000);
+        };
+    </script>
 </body>
 </html>
