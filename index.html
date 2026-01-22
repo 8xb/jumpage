@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    this.location = "https://saog.cn:5667" ;
-</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保持地址不变的嵌入页面</title>
+    <style>
+        /* 让iframe占满整个页面，无边界 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* 隐藏滚动条，避免双重滚动 */
+        }
+        #targetFrame {
+            width: 100%;
+            height: 100%;
+            border: none; /* 去掉iframe的边框 */
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 嵌入目标地址，地址栏不会变化 -->
+    <iframe id="targetFrame" src="https://saog.cn:5667"></iframe>
+</body>
 </html>
