@@ -1,27 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>保持地址不变的嵌入页面</title>
+    <title>GitHub Pages 嵌入页面</title>
     <style>
-        /* 让iframe占满整个页面，无边界 */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* 隐藏滚动条，避免双重滚动 */
-        }
-        #targetFrame {
-            width: 100%;
-            height: 100%;
-            border: none; /* 去掉iframe的边框 */
+        /* 完全隐藏iframe边框和滚动条，模拟原生页面 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100vh; overflow: hidden; }
+        #embedFrame {
+            width: 100vw;
+            height: 100vh;
+            border: 0;
             display: block;
+            /* 解决部分页面的跨域样式问题 */
+            frameborder: 0;
+            allowfullscreen: true;
+        }
+        /* 加载失败时的提示样式 */
+        .error-tip {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            font-size: 16px;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <!-- 嵌入目标地址，地址栏不会变化 -->
-    <iframe id="targetFrame" src="https://saog.cn:5667"></iframe>
+    <!-- 嵌入目标页面 -->
+    <iframe 
+        id="embedFrame" 
+        src="https://saog.cn:5667"
+        onload="this.style.display='block'"
+        onerror="document.querySelector('.error-tip').style.display='block'"
+    ></iframe>
+    
+    <!-- 加载失败提示 -->
+    <div class="error-tip" style="display: none;">
+        页面加载失败（目标网站禁止嵌入/网络错误）<br>
+        请直接访问：<a href="https://saog.cn:5667" target="_blank">https://saog.cn:5667</a>
+    </div>
 </body>
 </html>
