@@ -1,29 +1,85 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>跳转提示</title>
+    <title>正在跳转</title>
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: Arial; }
-        .container { text-align: center; padding: 20px; }
-        a { color: #007bff; text-decoration: none; font-size: 18px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #D4D0C8;
+            color: #000000;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background-color: #FFFFFF;
+            border: 2px solid #000000;
+            border-radius: 0px;
+            box-shadow: 2px 2px 0px #808080, -1px -1px 0px #FFFFFF;
+            min-width: 300px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        button {
+            display: inline-block;
+            padding: 6px 20px;
+            background-color: #D4D0C8;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 0px;
+            font-size: 14px;
+            border: 2px solid;
+            border-color: #FFFFFF #808080 #808080 #FFFFFF;
+            box-shadow: 1px 1px 0px #000000;
+            cursor: pointer;
+        }
+
+        button:active {
+            border-color: #808080 #FFFFFF #FFFFFF #808080;
+            box-shadow: inset 1px 1px 0px #000000;
+            padding: 7px 19px 5px 21px;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h2>正在为您打开页面...</h2>
-        <p>如果没有自动跳转，请点击下方链接：</p>
-        <a href="https://saog.cn:5667" target="_blank">访问 https://saog.cn:5667</a>
+        <p><span id="count">3</span>秒后自动跳转</p>
+        <button class="link-btn" onclick="window.location.href='https://saog.cn:5667'">立即访问</button>
     </div>
 
-    <!-- 尝试静默打开新窗口（部分浏览器会拦截） -->
     <script>
-        window.onload = () => {
-            setTimeout(() => {
-                window.open('https://saog.cn:5667', '_blank');
-            }, 1000);
-        };
+        let count = 3;
+        const countElement = document.getElementById('count');
+
+        const countdownTimer = setInterval(() => {
+            count--;
+            countElement.textContent = count;
+
+            if (count <= 0) {
+                clearInterval(countdownTimer);
+                // window.location.href = "https://saog.cn:5667";
+            }
+        }, 1000);
     </script>
 </body>
+
 </html>
